@@ -33,6 +33,7 @@ async function run() {
 
     const allProducts = client.db('allBirds').collection('allProducts')
     const cartProducts = client.db('allBirds').collection('cart')
+    const userCollection= client.db('allBirds').collection('user')
 
     app.get('/allProducts',async (req,res) =>{
       const query = {}
@@ -83,6 +84,12 @@ async function run() {
       const email = req.query.email;
       const query = {email:email}
       const result = await cartProducts.find(query).toArray()
+      res.send(result)
+    })
+
+    app.post('/user',async(req,res) =>{
+      const data = req.body;
+      const result = await userCollection.insertOne(data)
       res.send(result)
     })
 
