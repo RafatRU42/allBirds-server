@@ -93,6 +93,17 @@ async function run() {
       res.send(result)
     })
 
+    app.delete('/deleteProduct',async(req,res) =>{
+      const email = req.query.email;
+      const id = req.query.id
+      console.log('email',email);
+      const emailQuery = {email:email}
+      const emailData = await cartProducts.find(emailQuery).toArray()
+      const idQuery = {_id: new ObjectId(id)}
+      const deleteOne = await emailData.deleteOne(idQuery)
+      res.send(deleteOne)
+    })
+
 
     }
     finally{
