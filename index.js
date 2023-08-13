@@ -118,6 +118,42 @@ async function run() {
       res.send(data)
     })
 
+    app.get('/cap',async(req,res) =>{
+      const query = {category:'Cap'}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+    app.get('/pant',async(req,res) =>{
+      const query = {category:"Men's Pants"}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+    app.get('/bottle',async(req,res) =>{
+      const query = {category:'Bottle'}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+    app.get('/earphone',async(req,res) =>{
+      const query = {category:'Earphones'}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+    app.get('/shoes',async(req,res) =>{
+      const query = {category:"Men's Boot"}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+    app.get('/sneaker',async(req,res) =>{
+      const query = {category:"Men's Sneaker"}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+    app.get('/bag',async(req,res) =>{
+      const query = {category:"Bag"}
+      const result = await amazonProduct.find(query).toArray()
+      res.send(result)
+    })
+
 
     }
     finally{
