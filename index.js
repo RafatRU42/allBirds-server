@@ -35,6 +35,7 @@ async function run() {
     const cartProducts = client.db('allBirds').collection('cart')
     const userCollection= client.db('allBirds').collection('user')
     const amazonProduct = client.db('allBirds').collection('amazonProduct')
+    const wishList = client.db('allBirds').collection('wishList')
 
     app.get('/allProducts',async (req,res) =>{
       const query = {}
@@ -95,14 +96,14 @@ async function run() {
     })
 
     app.delete('/deleteProduct',async(req,res) =>{
-      const email = req.query?.email;
+     
       const id = req.query?.id
-      console.log('email',email);
-      const emailQuery = {email:email}
-      const emailData = await cartProducts.findOne(emailQuery)
+      console.log('id',id);
+    
+
       const idQuery = {_id: new ObjectId(id)}
-      const deleteOne = await emailData.deleteOne(idQuery)
-      res.send(deleteOne)
+      const deleteData = await cartProducts.deleteOne(idQuery)
+      res.send(deleteData)
     })
 
     app.get('/amazonProduct',async(req,res) =>{
@@ -152,6 +153,18 @@ async function run() {
       const query = {category:"Bag"}
       const result = await amazonProduct.find(query).toArray()
       res.send(result)
+    })
+
+    app.post('/addToWishList',async (req,res) =>{
+      const data = req.body;
+      const result = await wishList.insertOne(data)
+      res.send(result)
+    })
+
+    app.get('/getWishList',async(req,res) =>{
+      const query = {}
+      const result = await wishList.find(query).toArray()
+      res.send(res)
     })
 
 
